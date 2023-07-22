@@ -6,22 +6,10 @@ import {
     flexRender,
     getCoreRowModel,
     getFilteredRowModel,
-    getPaginationRowModel,
     getSortedRowModel,
     useReactTable
 } from "@tanstack/react-table"
 
-import { Label } from "@radix-ui/react-dropdown-menu"
-import dayjs from "dayjs"
-import { CalendarIcon, FilterIcon, TableIcon } from "lucide-react"
-import React from "react"
-import { useLocalStorage } from 'usehooks-ts'
-import { Button } from "@/shared/components/common/ui/button"
-import { Calendar } from "@/shared/components/common/ui/calendar"
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "@/shared/components/common/ui/dropdown-menu"
-import { Input } from "@/shared/components/common/ui/input"
-import { Popover, PopoverContent, PopoverTrigger } from "@/shared/components/common/ui/popover"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/components/common/ui/select"
 import {
     Table,
     TableBody,
@@ -30,9 +18,11 @@ import {
     TableHeader,
     TableRow,
 } from "@/shared/components/common/ui/table"
-import { cn } from "@/shared/utils/tailwind/functions"
-import DataTablePagination from "./DataTablePagination"
+import React, { useEffect } from "react"
+import { useLocalStorage } from 'usehooks-ts'
+import { Skeleton } from "../ui/skeleton"
 import DataTableHeader from "./DataTableHeader"
+import DataTablePagination from "./DataTablePagination"
 
 
 export const COLUMNDATA_TYPE = {
@@ -45,15 +35,26 @@ export const COLUMNDATA_TYPE = {
 export interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
-    tableName: 'register' | 'student' | 'classroom'
+    tableName: string,
+    // pagi config
+    isLoading: boolean
+    pageSize: number,
+    pageIndex: number,
+    pageCount: number,
+    handChangePagination: (value: number, type: 'Page_change' | 'Size_change') => void
 }
 
 function DataTable<TData, TValue>({
     columns,
     data,
     tableName,
+    pageCount,
+    pageSize,
+    pageIndex,
+    isLoading,
+    handChangePagination
 }: DataTableProps<TData, TValue>) {
-    const [columnVisibility, setColumnVisibility] = useLocalStorage(`findFinishDate::${tableName}::columnVisibility`, {})
+    const [columnVisibility, setColumnVisibility] = useLocalStorage(`${process.env.NEXT_PUBLIC_APP_NAME}::${tableName}::columnVisibility`, {})
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
         []
@@ -63,71 +64,91 @@ function DataTable<TData, TValue>({
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
-        getPaginationRowModel: getPaginationRowModel(),
+        /* turn on if client pagination */
+        // getPaginationRowModel: getPaginationRowModel(),
+        manualPagination: true,
+        pageCount: pageCount,
+        // autoResetPageIndex: true,
         onSortingChange: setSorting,
         getSortedRowModel: getSortedRowModel(),
         onColumnVisibilityChange: setColumnVisibility,
         onColumnFiltersChange: setColumnFilters,
         getFilteredRowModel: getFilteredRowModel(),
+
         state: {
             sorting,
             columnVisibility,
             columnFilters
         }
     })
+    useEffect(() => {
+        table.setPageSize(pageSize)
+        table.setPageIndex(pageIndex)
+    }, [pageIndex, pageSize])
 
-    return (
-        <div className="">
-            <DataTableHeader table={table} />
-            <div className="rounded-md border w-full">
-                <Table >
-                    <TableHeader >
-                        {table.getHeaderGroups().map((headerGroup) => (
-                            <TableRow key={headerGroup.id}>
-                                {headerGroup.headers.map((header) => {
-                                    return (
-                                        <TableHead key={header.id}>
-                                            {header.isPlaceholder
-                                                ? null
-                                                : flexRender(
-                                                    header.column.columnDef.header,
-                                                    header.getContext()
-                                                )}
-                                        </TableHead>
-                                    )
-                                })}
-                            </TableRow>
-                        ))}
-                    </TableHeader>
-                    <TableBody >
-                        {table.getRowModel().rows?.length ? (
-                            table.getRowModel().rows.map((row) => (
-                                <TableRow
-                                    key={row.id}
-                                    data-state={row.getIsSelected() && "selected"}
-                                >
-                                    {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id}>
-                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                        </TableCell>
-                                    ))}
-                                </TableRow>
-                            ))
-                        ) : (
-                            <TableRow>
-                                <TableCell colSpan={columns.length} className="h-24 text-center">
-                                    No results.
-                                </TableCell>
-                            </TableRow>
-                        )}
+    return <div className="">
+        <DataTableHeader table={table} />
+        <div className="rounded-md border w-full">
+            <Table >
+                <TableHeader >
+                    {table.getHeaderGroups().map((headerGroup) => (
+                        <TableRow key={headerGroup.id}>
+                            {headerGroup.headers.map((header) => {
+                                return (
+                                    <TableHead key={header.id}>
+                                        {header.isPlaceholder
+                                            ? null
+                                            : flexRender(
+                                                header.column.columnDef.header,
+                                                header.getContext()
+                                            )}
+                                    </TableHead>
+                                )
+                            })}
+                        </TableRow>
+                    ))}
+                </TableHeader>
+                {
+                    isLoading ? <TableBody>
+                        {Array.from(Array(table.getState().pagination.pageSize).keys()).map(index => <TableRow key={index}>
+                            <TableCell colSpan={columns.length} className="px-4">
+                                <Skeleton className="w-full h-10 mx-2 rounded-xl" />
+                            </TableCell>
+                        </TableRow>)}
                     </TableBody>
-                </Table>
-            </div>
-
-            <div className="flex flex-wrap items-center justify-end space-x-2 py-4">
-                <DataTablePagination table={table} />
-            </div>
+                        :
+                        <TableBody >
+                            {table.getRowModel().rows?.length ? (
+                                table.getRowModel().rows.map((row) => (
+                                    <TableRow
+                                        key={row.id}
+                                        data-state={row.getIsSelected() && "selected"}
+                                    >
+                                        {row.getVisibleCells().map((cell) => (
+                                            <TableCell key={cell.id}>
+                                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                            </TableCell>
+                                        ))}
+                                    </TableRow>
+                                ))
+                            ) : (
+                                <TableRow>
+                                    <TableCell colSpan={columns.length} className="h-24 text-center">
+                                        No results.
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                }
+            </Table>
         </div>
-    )
+
+        <div className="flex flex-wrap items-center justify-end space-x-2 py-4">
+            <DataTablePagination table={table} onChangeFunc={handChangePagination} />
+        </div>
+    </div>
+
+
+
 }
 export default DataTable

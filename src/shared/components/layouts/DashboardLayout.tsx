@@ -42,7 +42,7 @@ const DashBoardLayout = ({ children }: { children: React.ReactNode }) => {
                     {/*  <aside className="w-[200px] flex-col md:flex pl-8">
                         <SidebarNav items={SIDEBAR_MENU} />
                     </aside> */}
-                    <main className="col-span-12 flex w-full flex-1 flex-col overflow-hidden">
+                    <main className="col-span-12 flex w-full flex-1 flex-col overflow-hidden px-2">
                         {children}
                     </main>
                 </div>

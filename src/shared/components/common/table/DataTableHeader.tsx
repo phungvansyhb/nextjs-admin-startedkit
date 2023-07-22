@@ -2,7 +2,7 @@ import { Table } from '@tanstack/react-table';
 import React from 'react'
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import { Button } from '../ui/button';
-import { TableIcon } from 'lucide-react';
+import { EyeIcon, TableIcon } from 'lucide-react';
 
 interface DataTableHeaderProps<TData> {
     table: Table<TData>;
@@ -25,7 +25,7 @@ export default function DataTableHeader<TData>({
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button variant="outline" className="ml-auto">
-                        <TableIcon /> Cột
+                        <EyeIcon className="mr-2 h-4 w-4" /> View
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">

@@ -1,58 +1,25 @@
+import { ConfirmDialog } from '@/shared/components/common/dialog/ConfirmDialog';
 import DataTable from '@/shared/components/common/table/DataTable';
 import DataTableColumnHeader from '@/shared/components/common/table/DataTableColumnHeader';
 import { Button } from '@/shared/components/common/ui/button';
 import { Checkbox } from '@/shared/components/common/ui/checkbox';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/shared/components/common/ui/dialog';
 import { DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/shared/components/common/ui/dropdown-menu';
+import { IArticle, useGetListArticle } from '@/shared/schemas/models/IArticle';
+import { PAGINATION } from '@/shared/utils/constants/appContants';
 import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
-// import { DataTable } from '@/shared/components/common/table/DataTable'
 import { ColumnDef } from '@tanstack/react-table';
-import { Edit, MoreHorizontal, Trash2, User } from 'lucide-react';
-import React from 'react'
+import { Edit, ListPlus, MoreHorizontal, Trash2, User } from 'lucide-react';
+import React, { useEffect } from 'react'
 
 type Props = {}
-type User = {
-    id: React.Key,
-    name: string,
-    age: number,
-    active: boolean
-}
 
-export default function table({ }: Props) {
 
-    const Users = [
-        {
-            id: 1,
-            name: 'sy',
-            age: 18,
-            active: true
-        },
-        {
-            id: 2,
-            name: 'thuan',
-            age: 20,
-            active: true
-        },
-        {
-            id: 3,
-            name: 'dung',
-            age: 21,
-            active: true
-        },
-    ]
-    const columns: ColumnDef<User>[] = [
-        // {
-        //     accessorKey: "status",
-        //     header: "Khả dụng",
-        //     id: "Khả dụng",
-        //     cell: ({ row }) => <ActiveAction row={row.original} />,
-        //     meta: { type: COLUMNDATA_TYPE.BOOLEAN },
-        //     filterFn: (row, _y, value) => {
-        //         let tmp = false;
-        //         if (value === 'true') tmp = true;
-        //         if (tmp === row.original.status) return true;
-        //         else return false
-        //     },
-        // },
+export default function Table({ }: Props) {
+    const TABLE_NAME = 'Article'
+    const { data, onChangeSearchParams, tableConfig, getFieldValueOnSearchParam2 } = useGetListArticle()
+    const columns: ColumnDef<IArticle>[] = [
+
         {
             id: 'select',
             header: ({ table }) => (
@@ -64,7 +31,6 @@ export default function table({ }: Props) {
             ),
             cell: ({ row }) => (
                 <Checkbox
-                    className="ml-2"
                     checked={row.getIsSelected()}
                     onCheckedChange={(value) => row.toggleSelected(!!value)}
                     aria-label="Select row"
@@ -75,22 +41,34 @@ export default function table({ }: Props) {
         },
         {
             id: "Tên",
-            accessorKey: "name",
-            header: ({ column }) => <DataTableColumnHeader column={column} title="Tên người dùng" />,
-
+            accessorKey: "title",
+            header: ({ column }) => <DataTableColumnHeader column={column} title="Tên" defaultFilter={getFieldValueOnSearchParam2('title')} />,
+            meta: {
+                searchFn: (value: string) => {
+                    onChangeSearchParams({
+                        field: 'title',
+                        fieldType: 'STRING',
+                        op: 'LIKE',
+                        value: value
+                    })
+                }
+            }
         },
         {
-            id: "Tuổi",
-            accessorKey: "age",
-            header: "Tuổi"
+            id: "Mo ta",
+            accessorKey: "description",
+            header: ({ column }) => <DataTableColumnHeader column={column} title="Mô tả " />,
+            meta: {
+                searchFn: (value: string) => { console.log(value) }
+            }
         },
         {
             id: 'actions',
-            
+            header: "Action",
             cell: ({ row }) => {
                 const record = row.original;
                 return (
-                    <DropdownMenu>
+                    <DropdownMenu >
                         <DropdownMenuTrigger asChild>
                             <Button variant="outline" className="h-8 w-8 p-0">
                                 <span className="sr-only">Open menu</span>
@@ -98,13 +76,20 @@ export default function table({ }: Props) {
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                            <DropdownMenuItem className="cursor-pointer">
+                            <DropdownMenuItem className="cursor-pointer pl-4 font-medium">
                                 <Edit className="mr-2 h-4 w-4" /> Edit
                             </DropdownMenuItem>
-                            <DropdownMenuItem className="cursor-pointer">
-                                <Trash2 className="mr-2 h-4 w-4" />
-                                Delete
-                            </DropdownMenuItem>
+
+                            <ConfirmDialog
+                                triggerCpn={<Button variant={'ghost'} className='justify-start w-full' >
+                                    <Trash2 className="mr-2 h-4 w-4" />
+                                    Delete
+                                </Button>}
+                                title="Xóa "
+                                content="Chắc chắn Xóa"
+                                onOk={() => console.log('pressed')}
+                            />
+
                             <DropdownMenuSeparator />
                             <DropdownMenuItem
                                 className="cursor-pointer"
@@ -120,10 +105,14 @@ export default function table({ }: Props) {
 
     ];
 
-
     return (
         <div>
-            <DataTable data={Users} tableName='student' columns={columns as any} />
+            <DataTable
+                data={data?.data.content || []}
+                columns={columns}
+                tableName={TABLE_NAME}
+                {...tableConfig}
+            />
         </div>
     )
 }
