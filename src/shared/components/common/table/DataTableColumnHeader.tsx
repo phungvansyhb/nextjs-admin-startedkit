@@ -4,6 +4,7 @@ import {
   ChevronsUpDownIcon,
   EyeIcon,
   SearchIcon,
+  Settings2Icon,
 } from 'lucide-react';
 import { Column } from '@tanstack/react-table';
 
@@ -17,6 +18,9 @@ import {
 } from '@/shared/components/common/ui/dropdown-menu';
 import { cn } from '@/shared/utils/tailwind/functions';
 import { Input } from '../ui/input';
+import { useState } from 'react';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { Separator } from '../ui/separator';
 
 interface DataTableColumnHeaderProps<TData, TValue>
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -29,57 +33,51 @@ const DataTableColumnHeader = <TData, TValue>({
   title,
   className,
 }: DataTableColumnHeaderProps<TData, TValue>) => {
-  
+
   if (!column.getCanSort()) {
     return <div className={cn(className)}>{title}</div>;
   }
-
+  const itemClassName = 'p-2 rounded-md flex gap-4 items-center hover:bg-foreground/5 cursor-pointer'
   return (
     <div className={cn('flex items-center space-x-2', className)}>
-      <DropdownMenu >
-        <DropdownMenuTrigger asChild>
+      <Popover >
+        <PopoverTrigger asChild>
           <Button
             variant="ghost"
             size="sm"
             className="-ml-3 h-8 data-[state=open]:bg-accent"
+
           >
             <span>{title}</span>
-            {column.getIsSorted() === 'desc' && (
-              <ArrowDownIcon className="ml-2 h-4 w-4" />
-            )}
-            {column.getIsSorted() === 'asc' && (
-              <ArrowUpIcon className="ml-2 h-4 w-4" />
-            )}
-            {
-              !column.getIsSorted() && <ChevronsUpDownIcon className="ml-2 h-4 w-4" />
-            }
+            <Settings2Icon className='ml-2 h-4 w-4' />
+
           </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="start">
-          <DropdownMenuItem onClick={() => column.toggleSorting(false)}>
+        </PopoverTrigger>
+        <PopoverContent align="start" className='px-1 py-0'>
+          <div onClick={() => column.toggleSorting(false)} className={itemClassName}>
             <ArrowUpIcon className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
             Asc
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
+          </div>
+          <div onClick={() => column.toggleSorting(true)} className={itemClassName}>
             <ArrowDownIcon className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
             Desc
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
+          </div>
           {
             column.getCanHide() &&
 
-            <DropdownMenuItem onClick={() => column.toggleVisibility(false)}>
+            <div onClick={() => column.toggleVisibility(false)} className={itemClassName}>
               <EyeIcon className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
               Hide
-            </DropdownMenuItem>
+            </div>
           }
-          {column.getCanFilter() &&
-            <DropdownMenuItem className='flex '>
-              <SearchIcon className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" /> <Input />
-            </DropdownMenuItem>
-          }
-        </DropdownMenuContent>
-      </DropdownMenu>
+          <div onClick={() => column.toggleSorting(true)} className={itemClassName}>
+            <Input />
+            <Button onClick={() => { column?.getFilterFn() }}>Search</Button>
+          </div>
+
+        </PopoverContent>
+      </Popover>
+
     </div>
   );
 };

@@ -1,9 +1,12 @@
 import DataTable from '@/shared/components/common/table/DataTable';
 import DataTableColumnHeader from '@/shared/components/common/table/DataTableColumnHeader';
+import { Button } from '@/shared/components/common/ui/button';
 import { Checkbox } from '@/shared/components/common/ui/checkbox';
+import { DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/shared/components/common/ui/dropdown-menu';
+import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
 // import { DataTable } from '@/shared/components/common/table/DataTable'
 import { ColumnDef } from '@tanstack/react-table';
-import { User } from 'lucide-react';
+import { Edit, MoreHorizontal, Trash2, User } from 'lucide-react';
 import React from 'react'
 
 type Props = {}
@@ -74,12 +77,45 @@ export default function table({ }: Props) {
             id: "Tên",
             accessorKey: "name",
             header: ({ column }) => <DataTableColumnHeader column={column} title="Tên người dùng" />,
-            
+
         },
         {
             id: "Tuổi",
             accessorKey: "age",
             header: "Tuổi"
+        },
+        {
+            id: 'actions',
+            
+            cell: ({ row }) => {
+                const record = row.original;
+                return (
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="outline" className="h-8 w-8 p-0">
+                                <span className="sr-only">Open menu</span>
+                                <MoreHorizontal className="h-4 w-4" />
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                            <DropdownMenuItem className="cursor-pointer">
+                                <Edit className="mr-2 h-4 w-4" /> Edit
+                            </DropdownMenuItem>
+                            <DropdownMenuItem className="cursor-pointer">
+                                <Trash2 className="mr-2 h-4 w-4" />
+                                Delete
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem
+                                className="cursor-pointer"
+                                onClick={() => navigator.clipboard.writeText(JSON.stringify(record, null, 2))}
+                            >
+                                Copy
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                );
+            },
         },
 
     ];
