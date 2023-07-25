@@ -6,6 +6,7 @@ import {
     flexRender,
     getCoreRowModel,
     getFilteredRowModel,
+    getPaginationRowModel,
     getSortedRowModel,
     useReactTable
 } from "@tanstack/react-table"
@@ -36,7 +37,7 @@ export interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
     tableName: string,
-    // pagi config
+    isClientPagination?: boolean,
     isLoading: boolean
     pageSize: number,
     pageIndex: number,
@@ -48,6 +49,7 @@ function DataTable<TData, TValue>({
     columns,
     data,
     tableName,
+    isClientPagination = false,
     pageCount,
     pageSize,
     pageIndex,
@@ -64,10 +66,9 @@ function DataTable<TData, TValue>({
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
-        /* turn on if client pagination */
-        // getPaginationRowModel: getPaginationRowModel(),
-        manualPagination: true,
-        pageCount: pageCount,
+        getPaginationRowModel: getPaginationRowModel(),
+        manualPagination: !isClientPagination,
+        pageCount: !isClientPagination ? pageCount : undefined,
         // autoResetPageIndex: true,
         onSortingChange: setSorting,
         getSortedRowModel: getSortedRowModel(),
@@ -144,7 +145,7 @@ function DataTable<TData, TValue>({
         </div>
 
         <div className="flex flex-wrap items-center justify-end space-x-2 py-4">
-            <DataTablePagination table={table} onChangeFunc={handChangePagination} />
+            <DataTablePagination table={table} onChangeFunc={handChangePagination} isClientPagination={isClientPagination} />
         </div>
     </div>
 

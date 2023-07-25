@@ -16,6 +16,7 @@ import useRouterChange from '@/shared/hooks/useRouterChange';
 import DashBoardLayout from '@/shared/components/layouts/DashboardLayout';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import ProgressBarProvider from '@/shared/components/common/ui/progressbar';
+import { Toaster } from "@/shared/components/common/ui/toaster"
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -44,6 +45,7 @@ const Boostrap = ({
     <ProgressBarProvider>
       <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
         {getLayout(children)}
+        <Toaster />
       </NextThemesProvider>
     </ProgressBarProvider>
 

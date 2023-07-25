@@ -18,14 +18,38 @@ import {
 interface DataTablePaginationProps<TData> {
   table: Table<TData>;
   onChangeFunc?: (value: number, type: 'Page_change' | 'Size_change') => void,
+  isClientPagination: boolean
 }
 
 export default function DataTablePagination<TData>({
   table,
-  onChangeFunc
+  onChangeFunc,
+  isClientPagination
 }: DataTablePaginationProps<TData>) {
+  if (isClientPagination) {
+    return (
+      <div className="flex items-center justify-end space-x-2 py-4">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          Previous
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          Next
+        </Button>
+      </div>
+    )
+  }
   return (
-    <div className="flex items-center justify-between px-2 ml-auto">
+    <div className=" flex items-center justify-between px-2 ml-auto">
       <div className="flex items-center space-x-6 lg:space-x-8">
         <div className="flex items-center space-x-2">
           <p className="text-sm font-medium">Rows per page</p>
@@ -42,7 +66,7 @@ export default function DataTablePagination<TData>({
               <SelectValue placeholder={table.getState().pagination.pageSize} />
             </SelectTrigger>
             <SelectContent side="top">
-              {[2,10, 20, 30, 40, 50].map((pageSize) => (
+              {[2, 10, 20, 30, 40, 50].map((pageSize) => (
                 <SelectItem key={pageSize} value={`${pageSize}`}>
                   {pageSize}
                 </SelectItem>
