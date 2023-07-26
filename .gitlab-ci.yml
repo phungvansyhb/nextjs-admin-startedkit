@@ -1,0 +1,31 @@
+image: docker:latest
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  allow_failure: false
+  script:
+    - echo 'Start building USER'
+    - pwd
+    - docker stop ngs_work_management || true && docker rm ngs_work_management || true
+    - docker build -t ngs_work_management_tool:v1.0 .
+    - docker run -d --restart=always -it -p 8086:3000 --name ngs_work_management ngs_work_management_tool:v1.0
+    - echo 'build done!'
+
+  only:
+    - develop
+    - /^dev-.*$/
+
+deploy_dev:
+  stage: deploy
+  environment:
+    name: development
+  script:
+    - echo 'script for deploying on DEV'
+    - pwd
+    - echo 'DEPLOYED SUCCESSFULLY'
+  only:
+    - develop
+    - /^dev-.*$/

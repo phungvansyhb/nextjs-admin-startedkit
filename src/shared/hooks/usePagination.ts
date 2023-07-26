@@ -96,7 +96,7 @@ export default function usePagination<T>({ queryKey, apiFn, defaultParams }: Pro
         });
     }
     const finalFilter = defaultParams?.filters ? [...filters, ...defaultParams.filters] : filters;
-    const { data, isFetching, refetch } = useQuery({
+    const { data, isLoading, refetch } = useQuery({
         queryKey: [...queryKey, router],
         queryFn: () => apiFn({ page: pageIndex, size: pageSize, filters: finalFilter, sorts: sorts }),
 
@@ -107,7 +107,7 @@ export default function usePagination<T>({ queryKey, apiFn, defaultParams }: Pro
     const tableConfig = {
         pageSize: pageSize,
         pageIndex: pageIndex,
-        isLoading: isFetching,
+        isLoading: isLoading,
         //@ts-ignore
         pageCount: data?.data?.totalPages,
         handChangePagination: (value: number, type: 'Page_change' | 'Size_change') => {
@@ -122,7 +122,7 @@ export default function usePagination<T>({ queryKey, apiFn, defaultParams }: Pro
     return {
         data,
         tableConfig,
-        isFetching,
+        isLoading,
         refetch,
         pageIndex,
         pageSize,

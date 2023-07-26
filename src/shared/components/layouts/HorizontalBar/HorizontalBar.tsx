@@ -1,24 +1,42 @@
 import {
     Menubar,
-    MenubarCheckboxItem,
     MenubarContent,
     MenubarItem,
     MenubarMenu,
-    MenubarRadioGroup,
-    MenubarRadioItem,
-    MenubarSeparator,
-    MenubarShortcut,
-    MenubarSub,
-    MenubarSubContent,
-    MenubarSubTrigger,
-    MenubarTrigger,
+    MenubarTrigger
 } from "@/shared/components/common/ui/menubar"
+import { MenuItem } from "@/shared/utils/constants/menu"
+import Link from "next/link"
 
-/* TODO : need to receive contanst and gen  */
-export function Horizontalbar() {
+type Props = {
+    menus: MenuItem[]
+}
+/* TODO : add responsive */
+export function Horizontalbar({ menus }: Props) {
     return (
-        <Menubar className="border-none" >
-            <MenubarMenu>
+        <Menubar className="border-none hidden md:block" >
+            {menus.map((item) =>
+                <MenubarMenu key={item.href}>
+                    {!item.chidren && <MenubarTrigger  >
+                        <Link href={item.href} className="flex gap-1">
+                            {item.Icon} {item.title}
+                        </Link>
+                    </MenubarTrigger>}
+                    {item.chidren && <>
+                        <MenubarTrigger>{item.title}</MenubarTrigger>
+                        <MenubarContent>
+                            {item.chidren.map(chil => <MenubarItem key={chil.href} >
+                                <Link href={chil.href} className="flex gap-1" >
+                                    {chil.Icon} {chil.title}
+                                </Link>
+                            </MenubarItem>)}
+
+                        </MenubarContent>
+                    </>}
+                </MenubarMenu>
+            )}
+
+            {/* <MenubarMenu>
                 <MenubarTrigger>File</MenubarTrigger>
                 <MenubarContent>
                     <MenubarItem>
@@ -102,7 +120,7 @@ export function Horizontalbar() {
                     <MenubarSeparator />
                     <MenubarItem inset>Add Profile...</MenubarItem>
                 </MenubarContent>
-            </MenubarMenu>
+            </MenubarMenu> */}
         </Menubar>
     )
 }

@@ -9,7 +9,6 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import React, { ReactElement, ReactNode } from 'react';
 import { Provider } from 'react-redux';
-import { MAX_RETRY_REQUEST } from '@/shared/utils/constants/appContants';
 // import { useGetInfoByToken } from '@/shared/schema/models/IAppUser';
 import { useAppSelector } from '@/shared/hooks/useRedux';
 import useRouterChange from '@/shared/hooks/useRouterChange';
@@ -17,6 +16,7 @@ import DashBoardLayout from '@/shared/components/layouts/DashboardLayout';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import ProgressBarProvider from '@/shared/components/common/ui/progressbar';
 import { Toaster } from "@/shared/components/common/ui/toaster"
+import { MAX_RETRY_REQUEST } from '@/Settings';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;

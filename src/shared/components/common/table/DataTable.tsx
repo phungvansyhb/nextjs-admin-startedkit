@@ -83,9 +83,11 @@ function DataTable<TData, TValue>({
         }
     })
     useEffect(() => {
-        table.setPageSize(pageSize)
-        table.setPageIndex(pageIndex)
-    }, [pageIndex, pageSize])
+        if (!isClientPagination) {
+            table.setPageSize(pageSize)
+            table.setPageIndex(pageIndex)
+        }
+    }, [pageIndex, pageSize, isClientPagination, table])
 
     return <div className="">
         <DataTableHeader table={table} />
