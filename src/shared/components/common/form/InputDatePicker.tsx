@@ -14,9 +14,10 @@ type Props = {
     fieldName: string
     label?: string
     placeHolder?: string
+    disbleDateCondition?: (date: Date) => boolean
 }
 
-export default function InputDatePicker({ fieldName, form, label, placeHolder }: Props) {
+export default function InputDatePicker({ fieldName, form, label, placeHolder, disbleDateCondition }: Props) {
     return (
         <FormField
             control={form.control}
@@ -48,8 +49,13 @@ export default function InputDatePicker({ fieldName, form, label, placeHolder }:
                                 mode="single"
                                 selected={field.value}
                                 onSelect={field.onChange}
-                                disabled={(date) =>
-                                    date > new Date() || date < new Date("1900-01-01")
+                                disabled={(date) => {
+                                    if (disbleDateCondition) return disbleDateCondition(date)
+                                    else {
+                                        return date > new Date() || date < new Date("1900-01-01")
+                                    }
+                                }
+
                                 }
                                 initialFocus
                             />

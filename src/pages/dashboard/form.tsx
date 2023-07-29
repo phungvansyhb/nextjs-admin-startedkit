@@ -1,5 +1,6 @@
 
 import InputDatePicker from "@/shared/components/common/form/InputDatePicker"
+import { InputMultiSelect } from "@/shared/components/common/form/InputMultiSelect"
 import InputSelect from "@/shared/components/common/form/InputSelect"
 import InputText from "@/shared/components/common/form/InputText"
 import InputTextArea from "@/shared/components/common/form/InputTextArea"
@@ -26,7 +27,7 @@ export default function FormDemo({ initialValue }: Props) {
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: initialValue
+        defaultValues: { ...initialValue, selectMulti: [{ value: 1, label: 'A' }] }
     })
     function onSubmit(values: z.infer<typeof formSchema>) {
         // beforeCreate(values)
@@ -39,6 +40,7 @@ export default function FormDemo({ initialValue }: Props) {
                 <InputTextArea form={form} fieldName="textArea" label="TextArea" />
                 <InputDatePicker form={form} fieldName="datePicker" />
                 <InputSelect form={form} fieldName="select" options={[{ value: 1, label: 'A' }, { value: 2, label: 'B' }]} />
+                <InputMultiSelect form={form} fieldName="selectMulti" options={[{ value: 1, label: 'A' }, { value: 2, label: 'B' }, { value: 3, label: 'C' }, { value: 4, label: 'D' }]} />
 
 
                 <Button type="submit" > <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Cập nhật</Button>

@@ -1,5 +1,4 @@
 import ErrorBoundary from '@/shared/components/layouts/ErrorBoudary';
-// import DashBoardLayout from '@/shared/components/layouts/dashboard/DashboardLayout';
 import { store } from '@/shared/stores';
 import AbilityConfig from '@/shared/utils/functions/abilityBuild';
 import '@/styles/global.css';
@@ -14,9 +13,9 @@ import { useAppSelector } from '@/shared/hooks/useRedux';
 import useRouterChange from '@/shared/hooks/useRouterChange';
 import DashBoardLayout from '@/shared/components/layouts/DashboardLayout';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
-import ProgressBarProvider from '@/shared/components/common/ui/progressbar';
 import { Toaster } from "@/shared/components/common/ui/toaster"
 import { MAX_RETRY_REQUEST } from '@/Settings';
+import { HashLoader } from 'react-spinners';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -37,17 +36,20 @@ const Boostrap = ({
   getLayout: (page: ReactElement) => ReactNode;
 }) => {
   // useGetInfoByToken();
-  // const isRouteLoading = useAppSelector(state => state.appSlice.isRouteLoading)
+  const isRouteLoading = useAppSelector(state => state.appSlice.isRouteLoading)
   // useReserveUrl();
   useRouterChange()
   // const roles = useAppSelector(state => state.appSlice.user?.rolePermissionActionDtos)
   return (
-    <ProgressBarProvider>
+    <>
+      {isRouteLoading && <div className='bg-foreground/10 bg-opacity-70 absolute z-[9999] w-screen h-screen flex justify-center items-center'><HashLoader color="#016390"
+      /></div>}
       <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
         {getLayout(children)}
         <Toaster />
       </NextThemesProvider>
-    </ProgressBarProvider>
+    </>
+
 
     // <AbilityContext.Provider value={AbilityConfig(_.uniq(roles?.map(item => item.rolePermissionAction).flat(1)))}>
     //   {isRouteLoading && <div className='bg-slate-50 bg-opacity-70 absolute z-[9999] w-screen h-screen flex justify-center items-center'><HashLoader color="#016390"

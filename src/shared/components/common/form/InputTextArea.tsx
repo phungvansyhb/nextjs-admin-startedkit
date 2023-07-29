@@ -8,9 +8,11 @@ type Props = {
     fieldName: string
     label?: string
     placeHolder?: string
+    inputProps?: React.InputHTMLAttributes<HTMLTextAreaElement>
+
 }
 
-export default function InputTextArea({ fieldName, form, label, placeHolder }: Props) {
+export default function InputTextArea({ fieldName, form, label, placeHolder , inputProps }: Props) {
     return (
         <FormField
             control={form.control}
@@ -23,6 +25,7 @@ export default function InputTextArea({ fieldName, form, label, placeHolder }: P
                             className="resize-y"
                             placeholder={placeHolder}
                             {...field}
+                            {...inputProps}
                         />
                     </FormControl>
                     <FormMessage />

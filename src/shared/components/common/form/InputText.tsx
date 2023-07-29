@@ -8,18 +8,19 @@ type Props = {
     fieldName: string
     label?: string
     placeHolder?: string
+    inputProps?: React.InputHTMLAttributes<HTMLInputElement>
 }
 
-export default function InputText({ fieldName, form, label, placeHolder }: Props) {
+export default function InputText({ fieldName, form, label, placeHolder, inputProps }: Props) {
     return (
         <FormField
             control={form.control}
             name={fieldName}
             render={({ field }) => (
                 <FormItem>
-                    {label && <FormLabel>{label}</FormLabel>}
+                    {label && <FormLabel className='capitalize text-base'>{label}</FormLabel>}
                     <FormControl>
-                        <Input placeholder={placeHolder} {...field} />
+                        <Input placeholder={placeHolder} {...field} {...inputProps} />
                     </FormControl>
                     <FormMessage />
                 </FormItem>

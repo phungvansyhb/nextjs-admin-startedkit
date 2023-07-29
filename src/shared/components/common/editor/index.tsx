@@ -5,8 +5,13 @@ import "@blocknote/core/style.css";
 import { BlockNoteView, defaultReactSlashMenuItems, useBlockNote } from "@blocknote/react";
 import { insertImageSlash } from "./slashs/ImageSlash";
 import { ImageBlock } from "./blocks/ImageBlock";
+import { ConfirmDialog } from "../dialog/ConfirmDialog";
+import { useRef } from "react";
+import { ImgPickDialog } from "../dialog/ImgPickDialog";
 
 export default function Editor() {
+    const ref = useRef<HTMLButtonElement>(null)
+
     //@ts-ignore
     const editor: BlockNoteEditor | null = useBlockNote({
         theme: "light",
@@ -14,8 +19,8 @@ export default function Editor() {
             ...defaultBlockSchema,
             image: ImageBlock
         },
-        slashCommands: [...defaultReactSlashMenuItems, insertImageSlash],
-
+        slashCommands: [...defaultReactSlashMenuItems, insertImageSlash(ref)],
+        
         // customElements: {
         //     formattingToolbar: CustomFormattingToolbar
         // },
@@ -29,9 +34,20 @@ export default function Editor() {
         //     );
         // }
     });
-
+    if (editor) {
+        editor.domElement.addEventListener(
+            "keydown",
+            (e) => {
+                console.log(e)
+            },
+            true
+        );
+    }
     return <div className="w-full">
         <BlockNoteView editor={editor} />
-        <Button onClick={() => console.log(editor?.topLevelBlocks)} className="mt-4">Log content</Button>
+        <div>
+            <ImgPickDialog editor={editor!} triggerCpn={<Button ref={ref} className="hidden" >open modal</Button>} />
+            <Button onClick={() => console.log(editor?.topLevelBlocks)} className="mt-4">Log content</Button>
+        </div>
     </div>;
 }

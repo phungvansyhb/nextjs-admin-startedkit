@@ -79,12 +79,31 @@
     @apply bg-background text-foreground;
   }
 }
+
 .login-background {
-  background: linear-gradient(
-    68.8deg,
-    rgba(0, 0, 0, 0.95) 1.8%,
-    rgb(0, 55, 79) 31.8%,
-    rgb(9, 93, 134) 56.2%,
-    rgb(15, 155, 217) 89%
-  );
+  background: linear-gradient(68.8deg,
+      rgba(0, 0, 0, 0.95) 1.8%,
+      rgb(0, 55, 79) 31.8%,
+      rgb(9, 93, 134) 56.2%,
+      rgb(15, 155, 217) 89%);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: #fafafa;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: lightgray;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }

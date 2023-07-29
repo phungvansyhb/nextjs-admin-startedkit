@@ -14,9 +14,10 @@ type Props = {
     label?: string
     placeHolder?: string
     options?: { value: any, label: string }[]
+    handleOnChange? : (value:any)=>void
 }
 
-export default function InputSelect({ form, label, placeHolder, fieldName, options = [] }: Props) {
+export default function InputSelect({ form, label, placeHolder, fieldName, options = [] , handleOnChange }: Props) {
     return (
         <FormField
             control={form.control}
@@ -56,6 +57,7 @@ export default function InputSelect({ form, label, placeHolder, fieldName, optio
                                             key={op.value}
                                             onSelect={(value) => {
                                                 console.log(value)
+                                                if(handleOnChange) handleOnChange(value)
                                                 form.setValue(fieldName, op.value)
                                             }}
                                         >
