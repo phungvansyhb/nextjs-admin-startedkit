@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { deleteCookie } from 'cookies-next';
+import { deleteCookie, getCookie } from 'cookies-next';
 import { APP_SAVE_KEY } from '../utils/constants';
 
 
@@ -9,13 +9,15 @@ type APPSTATE = {
     isLogined: boolean,
     isCollapseMenu: boolean,
     isRouteLoading: boolean,
+    locale: IPInfo
 }
 
 const initialState: APPSTATE = {
     user: undefined,
     isLogined: false,
     isCollapseMenu: false,
-    isRouteLoading: false
+    isRouteLoading: false,
+    locale: JSON.parse(getCookie(APP_SAVE_KEY.LOCALE) as string || '{}')
 }
 export const appSlice = createSlice({
     name: 'appSlice',
@@ -37,11 +39,14 @@ export const appSlice = createSlice({
         },
         setLoading: (state, action: PayloadAction<boolean>) => {
             state.isRouteLoading = action.payload
+        },
+        setAppLocale: (state, action: PayloadAction<IPInfo>) => {
+            state.locale = action.payload
         }
-      
+
 
     }
 }
 )
-export const { login, logout, toggleMenu, setLoading } = appSlice.actions
+export const { login, logout, toggleMenu, setLoading, setAppLocale } = appSlice.actions
 export default appSlice.reducer

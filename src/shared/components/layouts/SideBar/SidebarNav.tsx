@@ -21,7 +21,7 @@ const SidebarNav = ({ menus }: Props) => {
     <nav className='grid items-start gap-2'>
       {menus.map((item, index) => {
         return item.chidren ? (
-          <Collapsible>
+          <Collapsible key={item.href}>
             <CollapsibleTrigger className='group flex w-full justify-between items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground'>
               <div className='flex '>
                 {item.Icon} {item.title}

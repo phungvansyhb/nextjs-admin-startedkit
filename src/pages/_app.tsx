@@ -16,6 +16,7 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { Toaster } from "@/shared/components/common/ui/toaster"
 import { MAX_RETRY_REQUEST } from '@/Settings';
 import { HashLoader } from 'react-spinners';
+import useGetLanguageFromIp from '@/shared/hooks/useGetLanguageFromIp';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -35,10 +36,10 @@ const Boostrap = ({
   children: React.ReactElement;
   getLayout: (page: ReactElement) => ReactNode;
 }) => {
-  // useGetInfoByToken();
   const isRouteLoading = useAppSelector(state => state.appSlice.isRouteLoading)
-  // useReserveUrl();
+  useGetLanguageFromIp()
   useRouterChange()
+  // useGetInfoByToken();
   // const roles = useAppSelector(state => state.appSlice.user?.rolePermissionActionDtos)
   return (
     <>

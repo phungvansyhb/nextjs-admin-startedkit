@@ -5,5 +5,6 @@ export const APP_SAVE_KEY = {
     USER_DATA: process.env.NEXT_PUBLIC_APP_NAME + ':user_data',
     USER_PERMISSION: process.env.NEXT_PUBLIC_APP_NAME + ':user_permission',
     CURRENTPATH_NAME: process.env.NEXT_PUBLIC_APP_NAME + '::pathname',
-    LAST_NOTALLOW_ACCESS_PATH: process.env.NEXT_PUBLIC_APP_NAME + '::last_not_allow_access'
+    LAST_NOTALLOW_ACCESS_PATH: process.env.NEXT_PUBLIC_APP_NAME + '::last_not_allow_access',
+    LOCALE: process.env.NEXT_PUBLIC_APP_NAME + "::locale"
 }
