@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
-import { UseFormReturn } from 'react-hook-form'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 import { Button } from '../ui/button'
 import { Check, ChevronsUpDown } from 'lucide-react'
 import { cn } from '@/shared/utils/tailwind/functions'
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '../ui/command'
 import { unionBy } from 'lodash-es'
-import { stringToSlug } from '@/shared/utils/functions/stringUtil'
 
 /* TODO : filter theo label hoac value */
 type Props = {
