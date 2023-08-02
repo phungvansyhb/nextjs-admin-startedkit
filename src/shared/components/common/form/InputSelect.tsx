@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
 import { UseFormReturn } from 'react-hook-form'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
@@ -6,6 +6,8 @@ import { Button } from '../ui/button'
 import { Check, ChevronsUpDown } from 'lucide-react'
 import { cn } from '@/shared/utils/tailwind/functions'
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '../ui/command'
+import { unionBy } from 'lodash-es'
+import { stringToSlug } from '@/shared/utils/functions/stringUtil'
 
 /* TODO : filter theo label hoac value */
 type Props = {
@@ -14,25 +16,33 @@ type Props = {
     label?: string
     placeHolder?: string
     options?: { value: any, label: string }[]
-    handleOnChange? : (value:any)=>void
+    handleOnchange?: () => void
+    // defaultValue? : any
 }
 
-export default function InputSelect({ form, label, placeHolder, fieldName, options = [] , handleOnChange }: Props) {
+export default function InputSelect({ form, label, placeHolder, fieldName, options = [], handleOnchange }: Props) {
+    const [open, setOpen] = useState(false)
+    const [searchText, setSearchText] = useState<string>()
+    const filtedOptions = options.filter(item => {
+        if (!searchText) return true
+        return item.label.toLowerCase().includes(searchText)
+    })
     return (
         <FormField
             control={form.control}
             name={fieldName}
             render={({ field }) => (
                 <FormItem>
-                    {label && <FormLabel>{label}</FormLabel>}
-                    <Popover>
-                        <PopoverTrigger asChild>
+                    {label && <FormLabel className='capitalize text-base'>{label}:</FormLabel>}
+                    <Popover open={open} onOpenChange={() => setOpen(!open)}>
+                        <PopoverTrigger asChild >
                             <FormControl>
                                 <Button
+                                    size='lg'
                                     variant="outline"
                                     role="combobox"
                                     className={cn(
-                                        "w-full justify-between",
+                                        "w-full justify-between px-3",
                                         !field.value && "text-muted-foreground"
                                     )}
                                 >
@@ -43,22 +53,21 @@ export default function InputSelect({ form, label, placeHolder, fieldName, optio
                                 </Button>
                             </FormControl>
                         </PopoverTrigger>
-                        <PopoverContent className="w-full p-0" >
-                            <Command >
-                                <CommandInput placeholder={placeHolder}
-                                />
+                        <PopoverContent className="w-full p-0" align='start' >
+                            <Command shouldFilter={false}>
+                                <CommandInput placeholder={placeHolder} onValueChange={(value) => setSearchText(value)} />
                                 <CommandEmpty >
                                     Not found...
                                 </CommandEmpty>
-                                <CommandGroup >
-                                    {options?.map((op) => (
+                                <CommandGroup className='max-h-[300px] overflow-y-auto'>
+                                    {unionBy(filtedOptions, 'value')?.map((op) => (
                                         <CommandItem
                                             value={op.value}
                                             key={op.value}
                                             onSelect={(value) => {
-                                                console.log(value)
-                                                if(handleOnChange) handleOnChange(value)
                                                 form.setValue(fieldName, op.value)
+                                                setOpen(!open)
+                                                handleOnchange && handleOnchange()
                                             }}
                                         >
                                             <Check
