@@ -2,22 +2,21 @@ image: docker:latest
 stages:
   - build
   - deploy
-
-build:
+# push to develop for build image bellow for testing
+build_dev:
   stage: build
   allow_failure: false
   script:
     - echo 'Start building USER'
     - pwd
-    - docker stop ngs_work_management || true && docker rm ngs_work_management || true
-    - docker build -t ngs_work_management_tool:v1.0 .
-    - docker run -d --restart=always -it -p 8086:3000 --name ngs_work_management ngs_work_management_tool:v1.0
+    - docker stop web-ngs-landing-test || true && docker rm web-ngs-landing-test || true
+    - docker build -t web-ngs-landing-test:v1.0 -f Dockerfile.test . 
+    - docker run -d --restart=always -it -p 8084:3000 --name web-ngs-landing-test web-ngs-landing-test:v1.0
     - echo 'build done!'
 
   only:
     - develop
     - /^dev-.*$/
-
 deploy_dev:
   stage: deploy
   environment:
@@ -29,3 +28,31 @@ deploy_dev:
   only:
     - develop
     - /^dev-.*$/
+
+# push to release* for build image bellow for production
+build_release:
+  stage: build
+  allow_failure: false
+  script:
+    - echo 'Start building USER'
+    - pwd
+    - docker stop web-ngs-landing-test-prod || true && docker rm web-ngs-landing-test-prod || true
+    - docker build -t web-ngs-landing-test-prod:v1.0 .
+    - docker run -d --restart=always -it -p 8086:3000 --name web-ngs-landing-test-prod web-ngs-landing-test-prod:v1.0
+    - echo 'build done!'
+
+  only:
+    - release
+    - /^release-.*$/
+
+deploy_prod:
+  stage: deploy
+  environment:
+    name: development
+  script:
+    - echo 'script for deploying on DEV'
+    - pwd
+    - echo 'DEPLOYED SUCCESSFULLY'
+  only:
+    - release
+    - /^release-.*$/
