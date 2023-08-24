@@ -1,27 +1,19 @@
-
 import {
     ColumnDef,
     ColumnFiltersState,
-    SortingState,
     flexRender,
     getCoreRowModel,
     getFilteredRowModel,
     getPaginationRowModel,
     getSortedRowModel,
+    SortingState,
     useReactTable
 } from "@tanstack/react-table"
 
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/shared/components/common/ui/table"
-import React, { useEffect } from "react"
-import { useLocalStorage } from 'usehooks-ts'
-import { Skeleton } from "../ui/skeleton"
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/common/ui/table"
+import React, {useEffect} from "react"
+import {useLocalStorage} from 'usehooks-ts'
+import {Skeleton} from "../ui/skeleton"
 import DataTableHeader from "./DataTableHeader"
 import DataTablePagination from "./DataTablePagination"
 

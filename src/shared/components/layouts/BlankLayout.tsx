@@ -1,4 +1,4 @@
-import useTrans from '@/shared/hooks/useTrans';
+import useTrans from '@/hooks/useTrans';
 import React from 'react';
 
 function BlankLayout({ children }: { children: React.ReactNode }) {

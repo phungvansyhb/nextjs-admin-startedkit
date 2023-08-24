@@ -1,8 +1,8 @@
-import { useQuery, QueryClient, useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/router';
-import { useDebugValue } from 'react';
-import { Filter, ISearchParams } from '../schemas/typedef/ISearchParams';
-import { PAGINATION } from '../utils/constants/appContants';
+import {useQuery} from '@tanstack/react-query';
+import {useRouter} from 'next/router';
+import {useDebugValue} from 'react';
+import {Filter, ISearchParams} from '../schemas/typedef/ISearchParams';
+import {PAGINATION} from '../utils/constants/appContants';
 
 type Props<T> = {
     apiFn: (_params?: ISearchParams) => Promise<T>;

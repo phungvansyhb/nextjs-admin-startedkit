@@ -10,8 +10,25 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@blocknote/core": "^0.8.2",
-    "@blocknote/react": "^0.8.2",
+    "@editorjs/checklist": "latest",
+    "@editorjs/code": "latest",
+    "@editorjs/delimiter": "latest",
+    "@editorjs/editorjs": "latest",
+    "@editorjs/embed": "latest",
+    "@editorjs/header": "latest",
+    "@editorjs/image": "latest",
+    "@editorjs/inline-code": "latest",
+    "@editorjs/link": "latest",
+    "@editorjs/list": "latest",
+    "@editorjs/marker": "latest",
+    "@editorjs/paragraph": "latest",
+    "@editorjs/quote": "latest",
+    "@editorjs/raw": "latest",
+    "@editorjs/simple-image": "latest",
+    "@editorjs/table": "latest",
+    "@editorjs/warning": "latest",
+    "editorjs-blocks-react-renderer": "^1.3.0",
+
     "@casl/ability": "^6.5.0",
     "@casl/react": "^3.1.0",
     "@hookform/resolvers": "^3.1.1",
@@ -51,7 +68,6 @@
     "lodash-es": "^4.17.21",
     "lucide-react": "^0.262.0",
     "next": "13.4.10",
-    "next-nprogress-bar": "^2.0.3",
     "next-themes": "^0.2.1",
     "postcss": "8.4.26",
     "react": "18.2.0",
@@ -69,6 +85,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@types/editorjs__header": "^2.6.0",
     "@types/lodash-es": "^4.17.8",
     "@types/prettier": "^2.7.3",
     "prettier": "^2.8.8",

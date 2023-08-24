@@ -1,10 +1,9 @@
-
-import { logout } from '@/shared/stores/appSlice';
-import { User2, UserCircle } from 'lucide-react';
-import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
-import { Button } from '../common/ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../common/ui/dropdown-menu';
+import {User2} from 'lucide-react';
+import {useRouter} from 'next/router';
+import {useDispatch} from 'react-redux';
+import {Button} from '../common/ui/button';
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from '../common/ui/dropdown-menu';
+import {logout} from "../../stores/appSlice";
 
 
 const AccountSetting = () => {

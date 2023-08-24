@@ -1,22 +1,22 @@
-import ErrorBoundary from '@/shared/components/layouts/ErrorBoudary';
-import { store } from '@/shared/stores';
-import AbilityConfig from '@/shared/utils/functions/abilityBuild';
-import '@/styles/global.css';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { NextPage } from 'next';
-import type { AppProps } from 'next/app';
+import ErrorBoundary from '@/components/layouts/ErrorBoudary';
+import AbilityConfig from '@/utils/functions/abilityBuild';
+import '../styles/global.css';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import {NextPage} from 'next';
+import type {AppProps} from 'next/app';
 import Head from 'next/head';
-import React, { ReactElement, ReactNode } from 'react';
-import { Provider } from 'react-redux';
+import React, {ReactElement, ReactNode} from 'react';
+import {Provider} from 'react-redux';
+import {useAppSelector} from '@/hooks/useRedux';
+import useRouterChange from '@/hooks/useRouterChange';
+import DashBoardLayout from '@/components/layouts/DashboardLayout';
+import {ThemeProvider as NextThemesProvider} from 'next-themes';
+import {Toaster} from "@/components/common/ui/toaster"
+import {HashLoader} from 'react-spinners';
+import useGetLanguageFromIp from '@/hooks/useGetLanguageFromIp';
+import {store} from "../shared/stores";
+import {MAX_RETRY_REQUEST} from "../Settings";
 // import { useGetInfoByToken } from '@/shared/schema/models/IAppUser';
-import { useAppSelector } from '@/shared/hooks/useRedux';
-import useRouterChange from '@/shared/hooks/useRouterChange';
-import DashBoardLayout from '@/shared/components/layouts/DashboardLayout';
-import { ThemeProvider as NextThemesProvider } from 'next-themes';
-import { Toaster } from "@/shared/components/common/ui/toaster"
-import { MAX_RETRY_REQUEST } from '@/Settings';
-import { HashLoader } from 'react-spinners';
-import useGetLanguageFromIp from '@/shared/hooks/useGetLanguageFromIp';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;

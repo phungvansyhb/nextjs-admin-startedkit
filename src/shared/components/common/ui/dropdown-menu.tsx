@@ -1,12 +1,8 @@
 import * as React from "react"
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu"
-import {
-  CheckIcon,
-  ChevronRightIcon,
-  DotFilledIcon,
-} from "@radix-ui/react-icons"
+import {CheckIcon, ChevronRightIcon, DotFilledIcon,} from "@radix-ui/react-icons"
 
-import { cn } from "@/shared/utils/tailwind/functions"
+import {cn} from "@/utils/tailwind/functions"
 
 const DropdownMenu = DropdownMenuPrimitive.Root
 

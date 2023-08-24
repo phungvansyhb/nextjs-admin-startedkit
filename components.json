@@ -10,7 +10,7 @@
     "cssVariables": true
   },
   "aliases": {
-    "components": "@/shared/components/common",
-    "utils": "@/shared/utils/tailwind/functions"
+    "components": "@/components/common",
+    "utils": "@/utils/tailwind/functions"
   }
 }

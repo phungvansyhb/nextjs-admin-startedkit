@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router';
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux';
-import { setLoading } from '../stores/appSlice';
+import {useRouter} from 'next/router';
+import {useEffect} from 'react'
+import {useDispatch} from 'react-redux';
+import {setLoading} from '../stores/appSlice';
 
 
 export default function useNprogress() {

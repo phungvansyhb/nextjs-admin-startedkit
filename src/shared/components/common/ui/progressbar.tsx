@@ -1,4 +1,4 @@
-import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
+import {AppProgressBar as ProgressBar} from 'next-nprogress-bar';
 
 const ProgressBarProvider = ({ children }: { children: React.ReactNode }) => {
     return (

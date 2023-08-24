@@ -1,8 +1,8 @@
 // import { toast } from 'react-toastify';
 import usePagination from "@/shared/hooks/usePagination";
-import { axiosInstanceNoAuth } from "../typedef/Axios";
-import { IBaseResponse, IBaseResponseWithCount } from "../typedef/IBaseResponse";
-import { Filter } from "../typedef/ISearchParams";
+import {axiosInstanceNoAuth} from "../typedef/Axios";
+import {IBaseResponse, IBaseResponseWithCount} from "../typedef/IBaseResponse";
+import {Filter} from "../typedef/ISearchParams";
 
 const QUERY_KEY = 'getListArticle'
 

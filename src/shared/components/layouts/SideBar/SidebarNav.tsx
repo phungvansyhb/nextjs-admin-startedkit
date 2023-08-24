@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import {usePathname} from 'next/navigation';
 
-import { cn } from '@/shared/utils/tailwind/functions';
-import { MenuItem } from '@/shared/utils/constants/menu';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../../common/ui/collapsible';
-import { ArrowDown, ArrowDown01, ChevronDown } from 'lucide-react';
+import {cn} from '@/utils/tailwind/functions';
+import {MenuItem} from '@/utils/constants/menu';
+import {Collapsible, CollapsibleContent, CollapsibleTrigger} from '../../common/ui/collapsible';
+import {ChevronDown} from 'lucide-react';
 
 type Props = {
   menus: MenuItem[];

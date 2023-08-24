@@ -1,53 +1,24 @@
-import { Button } from "@/shared/components/common/ui/button"
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/shared/components/common/ui/dialog"
-import { useState } from "react"
-import { Input } from "../ui/input"
-import { BlockNoteEditor } from "@blocknote/core"
+import {Button} from "@/components/common/ui/button"
+import {Dialog, DialogContent, DialogFooter, DialogHeader, DialogTrigger,} from "@/components/common/ui/dialog"
+import {useState} from "react"
+import {Input} from "../ui/input"
 
 type Props = {
-    title?: React.ReactNode,
-    content?: React.ReactNode,
-    onOk?: () => void,
-    triggerCpn: React.ReactNode,
-    editor: BlockNoteEditor
+   onOk: ()=>void
 }
 
-export function ImgPickDialog(props: Props) {
+export function ImgPickDialog(props : Props) {
     const [open, setOpen] = useState(false)
     const [text, setText] = useState('')
     return (
-        <Dialog open={open} onOpenChange={() => setOpen(!open)}>
-            <DialogTrigger asChild>
-                {props.triggerCpn}
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+        <Dialog open={true} >
+            <DialogContent className="sm:max-w-[425px]" hideCloseIcon>
                 <DialogHeader>
                     <Input onChange={(e) => setText(e.target.value)} />
                 </DialogHeader>
                 <DialogFooter>
                     <Button type="submit" onClick={() => {
-                        setOpen(false)
-                        props.editor.insertBlocks([
-                            {
-                                // @ts-ignore
-                                type: "image",
-                                props: {
-                                    // @ts-ignore
-                                    src: text,
-                                    alt: "hello"
-                                },
-                            },
-                        ],
-                            props.editor.getTextCursorPosition().block,
-                            "before")
+                        props.onOk()
                     }}>Đồng ý</Button>
                 </DialogFooter>
             </DialogContent>

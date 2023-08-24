@@ -1,7 +1,7 @@
-import type { PayloadAction } from '@reduxjs/toolkit';
-import { createSlice } from '@reduxjs/toolkit';
-import { deleteCookie, getCookie } from 'cookies-next';
-import { APP_SAVE_KEY } from '../utils/constants';
+import type {PayloadAction} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
+import {deleteCookie, getCookie} from 'cookies-next';
+import {APP_SAVE_KEY} from '../utils/constants';
 
 
 type APPSTATE = {

@@ -1,11 +1,11 @@
-import { useQuery } from '@tanstack/react-query'
+import {useQuery} from '@tanstack/react-query'
 import axios from 'axios'
-import { getCookie, setCookie } from 'cookies-next'
+import {getCookie, setCookie} from 'cookies-next'
 import dayjs from 'dayjs'
-import { useDebugValue, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { setAppLocale } from '../stores/appSlice'
-import { APP_SAVE_KEY } from '../utils/constants'
+import {useDebugValue, useState} from 'react'
+import {useDispatch} from 'react-redux'
+import {setAppLocale} from '../stores/appSlice'
+import {APP_SAVE_KEY} from '../utils/constants'
 
 export default function useGetLanguageFromIp() {
     const [locale, setLocale] = useState(getCookie(APP_SAVE_KEY.LOCALE))

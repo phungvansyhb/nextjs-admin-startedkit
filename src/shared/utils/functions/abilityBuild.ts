@@ -1,5 +1,5 @@
 // import { PermissionAction } from '@/shared/schema/models/IAppUser';
-import { AbilityBuilder, Ability } from '@casl/ability'
+import {Ability, AbilityBuilder} from '@casl/ability'
 
 type Actions = 'create' | 'view' | 'delete';
 export default function AbilityConfig(permissions?: any) {

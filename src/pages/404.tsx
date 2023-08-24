@@ -1,7 +1,5 @@
 // ** React Imports
-import { Button } from '@/shared/components/common/ui/button'
-import useTrans from '@/shared/hooks/useTrans'
-import { BanIcon } from 'lucide-react'
+import useTrans from '@/hooks/useTrans'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'

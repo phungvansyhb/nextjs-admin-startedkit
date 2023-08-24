@@ -1,4 +1,4 @@
-import { Button } from "@/shared/components/common/ui/button"
+import {Button} from "@/components/common/ui/button"
 import {
     Dialog,
     DialogContent,
@@ -7,8 +7,8 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/shared/components/common/ui/dialog"
-import { useState } from "react"
+} from "@/components/common/ui/dialog"
+import {useState} from "react"
 
 type Props = {
     title?: React.ReactNode,

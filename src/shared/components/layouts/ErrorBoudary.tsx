@@ -1,5 +1,4 @@
-import React, { Component, ErrorInfo, ReactNode } from "react";
-import { Button } from "../common/ui/button";
+import React, {Component, ErrorInfo, ReactNode} from "react";
 import Image from "next/image";
 import Link from "next/link";
 

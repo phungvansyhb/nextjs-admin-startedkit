@@ -1,17 +1,10 @@
 import * as React from "react"
 import * as LabelPrimitive from "@radix-ui/react-label"
-import { Slot } from "@radix-ui/react-slot"
-import {
-  Controller,
-  ControllerProps,
-  FieldPath,
-  FieldValues,
-  FormProvider,
-  useFormContext,
-} from "react-hook-form"
+import {Slot} from "@radix-ui/react-slot"
+import {Controller, ControllerProps, FieldPath, FieldValues, FormProvider, useFormContext,} from "react-hook-form"
 
-import { cn } from "@/shared/utils/tailwind/functions"
-import { Label } from "@/shared/components/common/ui/label"
+import {cn} from "@/utils/tailwind/functions"
+import {Label} from "@/components/common/ui/label"
 
 const Form = FormProvider
 

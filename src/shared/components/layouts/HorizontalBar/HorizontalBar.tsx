@@ -1,11 +1,5 @@
-import {
-    Menubar,
-    MenubarContent,
-    MenubarItem,
-    MenubarMenu,
-    MenubarTrigger
-} from "@/shared/components/common/ui/menubar"
-import { MenuItem } from "@/shared/utils/constants/menu"
+import {Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger} from "@/components/common/ui/menubar"
+import {MenuItem} from "@/utils/constants/menu"
 import Link from "next/link"
 
 type Props = {

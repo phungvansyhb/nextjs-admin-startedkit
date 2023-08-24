@@ -1,7 +1,7 @@
 import EnglishScript from 'public/locales/en';
 import VnScript from 'public/locales/vi';
-import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import {useRouter} from 'next/router';
+import {useCallback, useEffect, useState} from 'react';
 
 
 function getTrans(locale: string | undefined) {

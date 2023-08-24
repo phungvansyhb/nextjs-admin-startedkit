@@ -1,12 +1,12 @@
 import {
-  Toast,
-  ToastClose,
-  ToastDescription,
-  ToastProvider,
-  ToastTitle,
-  ToastViewport,
-} from "@/shared/components/common/ui/toast"
-import { useToast } from "@/shared/components/common/ui/use-toast"
+    Toast,
+    ToastClose,
+    ToastDescription,
+    ToastProvider,
+    ToastTitle,
+    ToastViewport,
+} from "@/components/common/ui/toast"
+import {useToast} from "@/components/common/ui/use-toast"
 
 export function Toaster() {
   const { toasts } = useToast()

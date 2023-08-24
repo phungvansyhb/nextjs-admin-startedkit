@@ -1,9 +1,9 @@
 import * as React from "react"
-import { Cross2Icon } from "@radix-ui/react-icons"
+import {Cross2Icon} from "@radix-ui/react-icons"
 import * as ToastPrimitives from "@radix-ui/react-toast"
-import { cva, type VariantProps } from "class-variance-authority"
+import {cva, type VariantProps} from "class-variance-authority"
 
-import { cn } from "@/shared/utils/tailwind/functions"
+import {cn} from "@/utils/tailwind/functions"
 
 const ToastProvider = ToastPrimitives.Provider
 

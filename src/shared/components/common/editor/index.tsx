@@ -1,53 +1,51 @@
-import { CustomFormattingToolbar } from "@/shared/components/common/editor/ToolBar";
-import { Button } from "@/shared/components/common/ui/button";
-import { BlockNoteEditor, defaultBlockSchema } from "@blocknote/core";
-import "@blocknote/core/style.css";
-import { BlockNoteView, defaultReactSlashMenuItems, useBlockNote } from "@blocknote/react";
-import { insertImageSlash } from "./slashs/ImageSlash";
-import { ImageBlock } from "./blocks/ImageBlock";
-import { ConfirmDialog } from "../dialog/ConfirmDialog";
-import { useRef } from "react";
-import { ImgPickDialog } from "../dialog/ImgPickDialog";
+import React, {memo, useEffect, useRef} from "react";
+import EditorJS, {LogLevels, OutputData} from "@editorjs/editorjs";
+import {EDITOR_JS_TOOLS} from "./EditorTools";
 
-export default function Editor() {
-    const ref = useRef<HTMLButtonElement>(null)
 
-    //@ts-ignore
-    const editor: BlockNoteEditor | null = useBlockNote({
-        theme: "light",
-        blockSchema: {
-            ...defaultBlockSchema,
-            image: ImageBlock
-        },
-        slashCommands: [...defaultReactSlashMenuItems, insertImageSlash(ref)],
-        
-        // customElements: {
-        //     formattingToolbar: CustomFormattingToolbar
-        // },
-        // If the editor contents were previously saved, restores them.
-        // initialContent: initialContent ? JSON.parse(initialContent) : undefined,
-        // Serializes and saves the editor contents to local storage.
-        // onEditorContentChange: (editor) => {
-        //     localStorage.setItem(
-        //         "editorContent",
-        //         JSON.stringify(editor.topLevelBlocks)
-        //     );
-        // }
-    });
-    if (editor) {
-        editor.domElement.addEventListener(
-            "keydown",
-            (e) => {
-                console.log(e)
-            },
-            true
-        );
-    }
-    return <div className="w-full">
-        <BlockNoteView editor={editor} />
-        <div>
-            <ImgPickDialog editor={editor!} triggerCpn={<Button ref={ref} className="hidden" >open modal</Button>} />
-            <Button onClick={() => console.log(editor?.topLevelBlocks)} className="mt-4">Log content</Button>
-        </div>
-    </div>;
-}
+//props
+type Props = {
+    data?: OutputData;
+    onChange(val: OutputData): void;
+    holder: string;
+};
+
+
+
+
+const EditorBlock = ({ data, onChange, holder }: Props) => {
+    //add a reference to editor
+    const ref = useRef<EditorJS>();
+    //initialize editorjs
+    useEffect(() => {
+        //initialize editor if we don't have a reference
+        if (!ref.current) {
+            const editor = new EditorJS({
+                holder: holder,
+                tools: EDITOR_JS_TOOLS,
+                logLevel: "ERROR" as LogLevels,
+                data,
+                placeholder: "Write Something awesome...",
+                async onChange(api, event) {
+                    const data = await api.saver.save();
+                    onChange(data);
+                },
+
+            });
+            ref.current = editor;
+        }
+
+        return () => {
+            if (ref.current && ref.current.destroy) {
+                ref.current.destroy();
+            }
+        };
+    }, []);
+
+
+    return <>
+        <div id={holder} className="border rounded-lg" />
+    </>;
+};
+
+export default memo(EditorBlock);

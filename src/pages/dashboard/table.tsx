@@ -1,16 +1,19 @@
-import { ConfirmDialog } from '@/shared/components/common/dialog/ConfirmDialog';
-import DataTable from '@/shared/components/common/table/DataTable';
-import DataTableColumnHeader from '@/shared/components/common/table/DataTableColumnHeader';
-import { Button } from '@/shared/components/common/ui/button';
-import { Checkbox } from '@/shared/components/common/ui/checkbox';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/shared/components/common/ui/dialog';
-import { DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/shared/components/common/ui/dropdown-menu';
-import { IArticle, useGetListArticle } from '@/shared/schemas/models/IArticle';
-import { PAGINATION } from '@/shared/utils/constants/appContants';
-import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
-import { ColumnDef } from '@tanstack/react-table';
-import { Edit, ListPlus, MoreHorizontal, Trash2, User } from 'lucide-react';
-import React, { useEffect } from 'react'
+import {ConfirmDialog} from '@/components/common/dialog/ConfirmDialog';
+import DataTable from '@/components/common/table/DataTable';
+import DataTableColumnHeader from '@/components/common/table/DataTableColumnHeader';
+import {Button} from '@/components/common/ui/button';
+import {Checkbox} from '@/components/common/ui/checkbox';
+import {
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger
+} from '@/components/common/ui/dropdown-menu';
+import {IArticle, useGetListArticle} from '@/schemas/models/IArticle';
+import {DropdownMenu} from '@radix-ui/react-dropdown-menu';
+import {ColumnDef} from '@tanstack/react-table';
+import {Edit, MoreHorizontal, Trash2} from 'lucide-react';
+import React from 'react'
 
 type Props = {}
 

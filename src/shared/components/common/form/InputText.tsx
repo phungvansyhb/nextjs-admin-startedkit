@@ -1,10 +1,10 @@
 import React from 'react'
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
-import { UseFormReturn } from 'react-hook-form'
-import { Input } from '../ui/input'
+import {FormControl, FormField, FormItem, FormLabel, FormMessage} from '../ui/form'
+import {Input} from '../ui/input'
+import {UseFormReturn} from "react-hook-form";
 
 type Props = {
-    form: any
+    form: UseFormReturn<any>
     fieldName: string
     label?: string
     placeHolder?: string

@@ -1,6 +1,6 @@
 import appSlice from './appSlice'
-import { configureStore } from '@reduxjs/toolkit'
-import { enableMapSet } from 'immer'
+import {configureStore} from '@reduxjs/toolkit'
+import {enableMapSet} from 'immer'
 
 
 enableMapSet()

@@ -1,16 +1,15 @@
 import React from 'react'
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
-import { UseFormReturn } from 'react-hook-form'
-import { Input } from '../ui/input'
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
-import { Button } from '../ui/button'
-import { CalendarIcon } from 'lucide-react'
-import { Calendar } from '../ui/calendar'
-import { cn } from '@/shared/utils/tailwind/functions'
-import { format } from 'date-fns'
+import {FormControl, FormField, FormItem, FormLabel, FormMessage} from '../ui/form'
+import {Popover, PopoverContent, PopoverTrigger} from '../ui/popover'
+import {Button} from '../ui/button'
+import {CalendarIcon} from 'lucide-react'
+import {Calendar} from '../ui/calendar'
+import {cn} from '@/utils/tailwind/functions'
+import {format} from 'date-fns'
+import {UseFormReturn} from "react-hook-form";
 
 type Props = {
-    form: any
+    form: UseFormReturn<any>
     fieldName: string
     label?: string
     placeHolder?: string
@@ -18,6 +17,7 @@ type Props = {
 }
 
 export default function InputDatePicker({ fieldName, form, label, placeHolder, disbleDateCondition }: Props) {
+
     return (
         <FormField
             control={form.control}

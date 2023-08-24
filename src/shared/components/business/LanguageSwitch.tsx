@@ -1,43 +1,15 @@
 'use client';
 
-import { useState } from 'react';
-import { CheckIcon, ChevronsUpDown, PlusCircleIcon } from 'lucide-react';
+import {useState} from 'react';
+import {CheckIcon, ChevronsUpDown} from 'lucide-react';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/shared/components/common/ui/avatar';
-import { Button } from '@/shared/components/common/ui/button';
-import {
-    Command,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-    CommandList,
-    CommandSeparator,
-} from '@/shared/components/common/ui/command';
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from '@/shared/components/common/ui/dialog';
-import { Input } from '@/shared/components/common/ui/input';
-import { Label } from '@/shared/components/common/ui/label';
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from '@/shared/components/common/ui/popover';
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from '@/shared/components/common/ui/select';
-import { cn } from '@/shared/utils/tailwind/functions';
+import {Avatar, AvatarFallback, AvatarImage} from '@/components/common/ui/avatar';
+import {Button} from '@/components/common/ui/button';
+import {Command, CommandGroup, CommandItem, CommandList, CommandSeparator,} from '@/components/common/ui/command';
+
+import {Popover, PopoverContent, PopoverTrigger,} from '@/components/common/ui/popover';
+
+import {cn} from '@/utils/tailwind/functions';
 
 const groups = [
     {

@@ -1,5 +1,4 @@
-import { DashboardIcon } from "@radix-ui/react-icons";
-import { ChurchIcon, Database, FileClock, FolderGit2, FormInputIcon, GitPullRequest, PieChartIcon, Store, Table, Text, UserSquare, Users2 } from "lucide-react";
+import {Database, FormInputIcon, Store, Table, Text, UserSquare} from "lucide-react";
 
 
 export type MenuItem = {

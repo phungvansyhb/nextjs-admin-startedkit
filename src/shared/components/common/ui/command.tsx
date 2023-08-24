@@ -1,10 +1,10 @@
 import * as React from "react"
-import { DialogProps } from "@radix-ui/react-dialog"
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons"
-import { Command as CommandPrimitive } from "cmdk"
+import {DialogProps} from "@radix-ui/react-dialog"
+import {MagnifyingGlassIcon} from "@radix-ui/react-icons"
+import {Command as CommandPrimitive} from "cmdk"
 
-import { cn } from "@/shared/utils/tailwind/functions"
-import { Dialog, DialogContent } from "@/shared/components/common/ui/dialog"
+import {cn} from "@/utils/tailwind/functions"
+import {Dialog, DialogContent} from "@/components/common/ui/dialog"
 
 const Command = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive>,

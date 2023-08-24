@@ -1,21 +1,11 @@
-import { ArrowDownIcon, ArrowUpIcon, ChevronsUpDownIcon, EyeIcon, SearchIcon, Settings2Icon } from 'lucide-react';
-import { Column } from '@tanstack/react-table';
+import {ArrowDownIcon, ArrowUpIcon, EyeIcon, SearchIcon, Settings2Icon} from 'lucide-react';
+import {Column} from '@tanstack/react-table';
 
-import { Button } from '@/shared/components/common/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/shared/components/common/ui/dropdown-menu';
-import { cn } from '@/shared/utils/tailwind/functions';
-import { Input } from '../ui/input';
-import { useEffect, useState } from 'react';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
-import { Separator } from '../ui/separator';
-import { useDebounce } from 'usehooks-ts';
-import { Filter, Sort } from '@/shared/schemas/typedef/ISearchParams';
+import {Button} from '@/components/common/ui/button';
+import {cn} from '@/utils/tailwind/functions';
+import {Input} from '../ui/input';
+import {useState} from 'react';
+import {Popover, PopoverContent, PopoverTrigger} from '../ui/popover';
 import classNames from 'classnames';
 
 interface DataTableColumnHeaderProps<TData, TValue> extends React.HTMLAttributes<HTMLDivElement> {

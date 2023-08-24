@@ -1,16 +1,15 @@
-import LanguageSwitcher from '../business/LanguageSwitch';
 import ThemeModeToggle from '../business/ToggleThemeMode';
-import type { Metadata } from 'next';
+import type {Metadata} from 'next';
 import SidebarNav from './SideBar/SidebarNav';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Horizontalbar } from './HorizontalBar/HorizontalBar';
-import { APP_MENU } from '@/shared/utils/constants/menu';
-import { MENULAYOUT } from '@/Settings';
-import { Button } from '../common/ui/button';
-import { Menu } from 'lucide-react';
-import { Sheet, SheetContent, SheetTrigger } from '../common/ui/sheet';
+import {Horizontalbar} from './HorizontalBar/HorizontalBar';
+import {APP_MENU} from '@/utils/constants/menu';
+import {Button} from '../common/ui/button';
+import {Menu} from 'lucide-react';
+import {Sheet, SheetContent, SheetTrigger} from '../common/ui/sheet';
 import AccountSetting from '../business/AccountSetting';
+import {MENULAYOUT} from "../../../Settings";
 
 export const metadata: Metadata = {
     title: 'Admin dashboard',

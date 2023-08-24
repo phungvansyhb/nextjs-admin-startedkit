@@ -1,8 +1,7 @@
-import FormA from '@/shared/components/business/bussinessA/FormA'
-import { Button } from '@/shared/components/common/ui/button'
-import { ListBulletIcon } from '@radix-ui/react-icons'
-import { useRouter } from 'next/router'
-import { z } from 'zod'
+import FormA from '@/components/business/bussinessA/FormA'
+import {Button} from '@/components/common/ui/button'
+import {ListBulletIcon} from '@radix-ui/react-icons'
+import {useRouter} from 'next/router'
 
 type Props = {}
 

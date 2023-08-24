@@ -1,19 +1,10 @@
-
-
-import { Button, buttonVariants } from '@/shared/components/common/ui/button';
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from '@/shared/components/common/ui/card';
-import { Input } from '@/shared/components/common/ui/input';
-import { Label } from '@/shared/components/common/ui/label';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/components/common/ui/tabs';
-import BlankLayout from '@/shared/components/layouts/BlankLayout';
-import { cn } from '@/shared/utils/tailwind/functions';
+import {Button, buttonVariants} from '@/components/common/ui/button';
+import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,} from '@/components/common/ui/card';
+import {Input} from '@/components/common/ui/input';
+import {Label} from '@/components/common/ui/label';
+import {Tabs, TabsContent} from '@/components/common/ui/tabs';
+import BlankLayout from '@/components/layouts/BlankLayout';
+import {cn} from '@/utils/tailwind/functions';
 import Image from 'next/image';
 import Link from 'next/link';
 

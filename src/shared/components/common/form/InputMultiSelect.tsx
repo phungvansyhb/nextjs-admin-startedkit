@@ -1,19 +1,16 @@
 import * as React from "react";
-import { X } from "lucide-react";
+import {X} from "lucide-react";
 
-import { Badge } from "@/shared/components/common/ui/badge";
-import {
-    Command,
-    CommandGroup,
-    CommandItem,
-} from "@/shared/components/common/ui/command";
-import { Command as CommandPrimitive } from "cmdk";
-import { FormField, FormItem, FormLabel } from "../ui/form";
+import {Badge} from "@/components/common/ui/badge";
+import {Command, CommandGroup, CommandItem,} from "@/components/common/ui/command";
+import {Command as CommandPrimitive} from "cmdk";
+import {FormField, FormItem, FormLabel} from "../ui/form";
+import {UseFormReturn} from "react-hook-form";
 
 type Item = Record<"value" | "label", string>;
 
 type Props = {
-    form: any
+    form:  UseFormReturn<any>
     fieldName: string
     label?: string
     placeHolder?: string

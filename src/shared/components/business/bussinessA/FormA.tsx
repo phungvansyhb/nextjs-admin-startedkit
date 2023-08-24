@@ -1,13 +1,13 @@
-import InputText from '@/shared/components/common/form/InputText'
-import InputTextArea from '@/shared/components/common/form/InputTextArea'
-import { Form } from '@/shared/components/common/ui/form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Loader2, MoveLeft } from 'lucide-react'
-import React, { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { Button } from '../../common/ui/button'
-import { IArticle } from '@/shared/schemas/models/IArticle'
+import InputText from '@/components/common/form/InputText'
+import InputTextArea from '@/components/common/form/InputTextArea'
+import {Form} from '@/components/common/ui/form'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {Loader2, MoveLeft} from 'lucide-react'
+import React, {useEffect} from 'react'
+import {useForm} from 'react-hook-form'
+import {z} from 'zod'
+import {Button} from '../../common/ui/button'
+import {IArticle} from '@/schemas/models/IArticle'
 
 type Props = {
     onSubmit: (value: Partial<IArticle>) => void

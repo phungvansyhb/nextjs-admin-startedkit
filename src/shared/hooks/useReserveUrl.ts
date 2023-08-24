@@ -1,7 +1,7 @@
-import { setCookie } from 'cookies-next'
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
-import { APP_SAVE_KEY } from '../utils/constants'
+import {setCookie} from 'cookies-next'
+import {useEffect} from 'react'
+import {useRouter} from 'next/router'
+import {APP_SAVE_KEY} from '../utils/constants'
 
 
 export default function useReserveUrl() {
